@@ -14,13 +14,12 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-
 const socket = io(process.env.NEXT_PUBLIC_API_URL);
 
 const firaCode = Fira_Code({ subsets: ["latin"] });
 function Home({ repo, userId }: { repo: any; userId: any }) {
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
-  const [repoURL, setURL] = useState<any>();
+  const [repoURL, setURL] = useState<any>("");
   const [depdata, setDepdata] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
@@ -66,6 +65,7 @@ function Home({ repo, userId }: { repo: any; userId: any }) {
         console.log("deploy", deploy.data);
 
         setDepdata(deploy?.data?.uri);
+        setDeployPreviewURL(deploy?.data?.uri);
       }
     } catch (error: any) {
       setLoading(false);
@@ -90,7 +90,9 @@ function Home({ repo, userId }: { repo: any; userId: any }) {
   const handleSocketIncommingMessage = useCallback((message: any) => {
     if (message.log == "Done") {
       setLoading(false);
-      setDeployPreviewURL(depDataRef.current);
+      console.log("deploymet done");
+      console.log("datarep.current", depDataRef.current);
+      // setDeployPreviewURL(depDataRef.current);
     }
     setLogs((prev) => [...prev, message.log]);
 
