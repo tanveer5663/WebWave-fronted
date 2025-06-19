@@ -13,8 +13,7 @@ import { Fira_Code } from "next/font/google";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "@/firebase/config";
+
 
 const socket = io(process.env.NEXT_PUBLIC_API_URL);
 
