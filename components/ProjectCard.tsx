@@ -12,14 +12,14 @@ function ProjectCard({ data }: { data: any }) {
   return (
     <Card className="p-4 mb-6 md:mb-0 rounded-md shadow-none hover:shadow-md shadow-gray-100 cursor-pointer transition-all space-y-4  bg-muted">
       <CardTitle className="text-lg font-semibold  ">
-        <Link href={data.deployUrl} target="_blank">
+        <Link href={data?.deployUrl} target="_blank">
           Live URL
         </Link>{" "}
       </CardTitle>
       <CardDescription className=" break-words text-lg text-primary tracking-tight">
-        <Link href={data.deployUrl} target="_blank">
-          {data.deployUrl}
-        </Link>{" "}
+        <Link href={data?.deployUrl} target="_blank">
+          {data?.deployUrl}
+        </Link>
       </CardDescription>
 
       <CardFooter

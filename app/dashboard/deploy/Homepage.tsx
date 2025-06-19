@@ -41,7 +41,7 @@ function Home({ repo, userId }: { repo: any; userId: any }) {
   }, [repoURL]);
 
   const handleClickDeploy = async (e: any) => {
-    console.log("starting deploy", e, repoURL);
+  
     setLoading(true);
     setDeployPreviewURL("");
     setLogs([]);
@@ -62,7 +62,7 @@ function Home({ repo, userId }: { repo: any; userId: any }) {
             gitURL: e || repoURL,
           }
         );
-        console.log("deploy", deploy.data);
+       
 
         setDepdata(deploy?.data?.uri);
         setDeployPreviewURL(deploy?.data?.uri);
@@ -90,8 +90,7 @@ function Home({ repo, userId }: { repo: any; userId: any }) {
   const handleSocketIncommingMessage = useCallback((message: any) => {
     if (message.log == "Done") {
       setLoading(false);
-      console.log("deploymet done");
-      console.log("datarep.current", depDataRef.current);
+     
       // setDeployPreviewURL(depDataRef.current);
     }
     setLogs((prev) => [...prev, message.log]);

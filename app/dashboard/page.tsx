@@ -14,7 +14,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 
 function Page() {
   const { user, isLoaded } = useUser();
- 
+
   const [data, setData] = useState<any>(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -28,12 +28,10 @@ function Page() {
           );
           const querySnapshot = await getDocs(q);
 
-          const projects = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
+          const projects = querySnapshot.docs
+            .map((doc) => ({ id: doc.id, ...(doc.data() as any) }))
+            .filter((doc) => doc.deployUrl); // filters out null/undefined/empty
           setData(projects);
-          console.log("projects", projects);
         } catch (err) {
           console.error("Error fetching document:", err);
         }
@@ -76,7 +74,7 @@ function Page() {
               interviews
             </p>
 
-            <Link href={"/generate/create"} className="mt-4">
+            <Link href={"/dashboard/deploy"} className="mt-4">
               <Button size={"sm"}>
                 <Plus className="min-w-5 min-h-5 mr-1" />
                 Add New
